@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Return Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #E53935;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #B71C1C;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+            font-weight: bold;
+        }
+        .footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 130px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="w-100 d-flex justify-content-between px-3">
+        <a class="navbar-brand" href="#">ST. HENRRY SAISI WABUGE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="books.html">Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="student.html">Students</a></li>
+                <li class="nav-item"><a class="nav-link" href="issue_book.html">Issue Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="return_book.html">Return Books</a></li>
+            </ul>
+        </div>
+        <a href="logout.php" class="btn btn-danger">Logout</a>
+    </div>
+</nav>
+
+<!-- Return Book Form -->
+<div class="container">
+    <h1>Return Book</h1>
+    <form id="returnBookForm">
+        <input type="text" name="student_id" id="student_id" placeholder="Enter Student ID" required>
+        <input type="text" name="book_name" id="book_name" placeholder="Enter Book Name" required>
+        <input type="date" name="return_date" id="return_date" required>
+        <button type="submit">Return Book</button>
+    </form>
+    <p id="successMessage" class="success-message"></p>
+</div>
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#returnBookForm").submit(function(event) {
+            event.preventDefault(); // Prevent page reload
+
+            $.ajax({
+                url: "process_return.php",
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === "success") {
+                        alert(response.message); // Show success pop-up
+                        window.location.href = "dashboard.php?tab=returned"; // Redirect to return book dashboard
+                    } else {
+                        alert("Error: " + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("AJAX request failed: " + error);
+                }
+            });
+        });
+    });
+</script>
+
+
+<!-- Footer -->
+<div class="footer">
+    <p>St. Herry Saisi Library &copy; 2025 | All Rights Reserved</p>
+</div>
+</body>
+</html>
