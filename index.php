@@ -117,13 +117,13 @@ $returnedBooks = $conn->query("SELECT COUNT(*) AS count FROM return_books")->fet
                 <img src="images/lib3.jpg" class="d-block w-100" alt="Library Image 3">
             </div>
             <div class="carousel-item">
-                <img src="images/lib5.jpg" class="d-block w-100" alt="Library Image 1">
+                <img src="images/lib5.jpg" class="d-block w-100" alt="Library Image 4">
             </div>
             <div class="carousel-item">
-                <img src="images/lib6.jpg" class="d-block w-100" alt="Library Image 2">
+                <img src="images/lib6.jpg" class="d-block w-100" alt="Library Image 5">
             </div>
             <div class="carousel-item">
-                <img src="images/lib8.jpg" class="d-block w-100" alt="Library Image 3">
+                <img src="images/lib8.jpg" class="d-block w-100" alt="Library Image 6">
             </div>
         </div>
     </div>
